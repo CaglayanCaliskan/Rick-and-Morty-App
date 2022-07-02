@@ -44,7 +44,7 @@ interface IQuery {
     variables: {page: number; filtered: string};
   }) => any;
   getMoreCharacters: (page: number) => any;
-  refetch: any;
+  refetch: (payload: {filtered: string}) => any;
 }
 
 //merge function to infinitely loop through pages
