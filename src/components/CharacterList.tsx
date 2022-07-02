@@ -6,7 +6,16 @@ import Character from './Character';
 // query
 import {useGetAllCharactersQuery} from '../graphql/queries/getAllCharactersQuery';
 
-const CharacterList = () => {
+import {FunctionComponent} from 'react';
+
+interface ICharacterList {
+  showModal: {
+    showOn: boolean;
+    type: string;
+    filter: string;
+  };
+}
+const CharacterList: FunctionComponent<ICharacterList> = ({showModal}) => {
   const {
     characters,
     count,
@@ -14,16 +23,20 @@ const CharacterList = () => {
     nextPage,
     getCharacters,
     getMoreCharacters,
+    refetch,
   } = useGetAllCharactersQuery();
 
   useEffect(() => {
     getCharacters({
       variables: {
         page: 1,
-        filtered: '',
+        filtered: showModal.filter,
       },
     });
-  }, [getCharacters]);
+    if (showModal.filter !== '') {
+      refetch({filtered: showModal.filter});
+    }
+  }, [getCharacters, showModal.filter, refetch]);
 
   const loadMore = () => {
     nextPage && getMoreCharacters(currentPage + 1);

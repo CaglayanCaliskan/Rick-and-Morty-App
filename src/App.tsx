@@ -8,13 +8,15 @@ function App() {
   const [showModal, setShowModal] = useState({
     showOn: false,
     type: '',
+    filter: '',
   });
+
   return (
     <div className='App'>
       <Modal setShowModal={setShowModal} showModal={showModal}>
         <Header setShowModal={setShowModal} />
+        <CharacterList showModal={showModal} />
       </Modal>
-      <CharacterList />
     </div>
   );
 }

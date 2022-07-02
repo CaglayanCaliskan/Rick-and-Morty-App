@@ -14,7 +14,9 @@ const Header: FunctionComponent<IHeaderProps> = (props) => {
         <button
           className='btn'
           style={{background: '#fff'}}
-          onClick={() => props.setShowModal({showOn: true, type: 'filter'})}
+          onClick={() =>
+            props.setShowModal({showOn: true, type: 'filter', filter: ''})
+          }
         >
           <AiTwotoneFilter size={25} fill='grey' />
         </button>
@@ -25,6 +27,7 @@ const Header: FunctionComponent<IHeaderProps> = (props) => {
           props.setShowModal({
             showOn: true,
             type: 'add',
+            filter: '',
           })
         }
         className='btn'

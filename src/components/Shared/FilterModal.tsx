@@ -3,8 +3,12 @@ import {FunctionComponent} from 'react';
 
 interface IFilterModal {
   setShowModal: Function;
+  showModal: any;
 }
-const FilterModal: FunctionComponent<IFilterModal> = ({setShowModal}) => {
+const FilterModal: FunctionComponent<IFilterModal> = ({
+  setShowModal,
+  showModal,
+}) => {
   return (
     <div className='modal'>
       <div className='modal-body' style={{minWidth: '300px'}}>
@@ -12,7 +16,7 @@ const FilterModal: FunctionComponent<IFilterModal> = ({setShowModal}) => {
           <h2>Filter</h2>
           <h2>
             <CgClose
-              onClick={() => setShowModal({showOn: false, type: ''})}
+              onClick={() => setShowModal({...showModal, type: ''})}
               style={{cursor: 'pointer'}}
             />
           </h2>
@@ -20,11 +24,25 @@ const FilterModal: FunctionComponent<IFilterModal> = ({setShowModal}) => {
         <div className='modal-content'>
           <div>
             <label>Rick</label>
-            <input type='radio' name='filter' value='rick' />
+            <input
+              type='radio'
+              name='filter'
+              value='rick'
+              onChange={(e) => {
+                setShowModal({...showModal, filter: e.target.value});
+              }}
+            />
           </div>
           <div>
             <label>Morty</label>
-            <input type='radio' name='filter' value='morty' />
+            <input
+              onChange={(e) => {
+                setShowModal({...showModal, filter: e.target.value});
+              }}
+              type='radio'
+              name='filter'
+              value='morty'
+            />
           </div>
         </div>
       </div>

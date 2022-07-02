@@ -10,6 +10,7 @@ interface IModalProps {
   showModal: {
     showOn: boolean;
     type: string;
+    filter: string;
   };
   children: any;
 }
@@ -27,7 +28,7 @@ const Modal: FunctionComponent<IModalProps> = (props) => {
           ''
         )}
         {showModal.type === 'filter' ? (
-          <FilterModal setShowModal={setShowModal} />
+          <FilterModal setShowModal={setShowModal} showModal={showModal} />
         ) : (
           ''
         )}

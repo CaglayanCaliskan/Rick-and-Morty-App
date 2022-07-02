@@ -44,6 +44,7 @@ interface IQuery {
     variables: {page: number; filtered: string};
   }) => any;
   getMoreCharacters: (page: number) => any;
+  refetch: any;
 }
 
 //merge function to infinitely loop through pages
@@ -60,7 +61,7 @@ export const mergePolicyCharacters = (existing: any = [], incoming: any) => {
 };
 
 export function useGetAllCharactersQuery(): IQuery {
-  const [getCharacters, {data, fetchMore}] =
+  const [getCharacters, {data, fetchMore, refetch}] =
     useLazyQuery<FetchCharactersQueryResponse>(GET_ALL_CHARACTERS_QUERY);
 
   const prevPage = data?.characters.info.prev;
@@ -78,5 +79,6 @@ export function useGetAllCharactersQuery(): IQuery {
     nextPage: nextPage,
     getCharacters,
     getMoreCharacters,
+    refetch,
   };
 }
